@@ -5,6 +5,9 @@ LABEL name="Mistral" \
       maintainers="Andras Kovi <akovi@nokia.com> \
                    Vitalii Solodilov <mcdkr@yandex.ru>"
 
+COPY tools/docker/get-pip.py /tmp/get-pip.py
+COPY tools/docker/pip.conf /etc/pip.conf
+
 RUN apt-get -qq update && \
     apt-get install -y  \
       libffi-dev \
@@ -22,7 +25,6 @@ RUN apt-get -qq update && \
       gcc \
       libuv1 \
       libuv1-dev && \
-      curl -f -o /tmp/get-pip.py https://bootstrap.pypa.io/3.2/get-pip.py && \
       python /tmp/get-pip.py && rm /tmp/get-pip.py && \
       pip install --upgrade pip
 
